@@ -10,6 +10,8 @@ root.title('Tic-Tac-Toe game by Naveen')
 clicked = True
 count = 0
 
+
+
 # disable buttons if some one wins
 def disable_all_buttons():
     b1.config(state=DISABLED)
@@ -141,6 +143,10 @@ def checkifwon():
         winner = True
         messagebox.showinfo('Tic Tac Toe', 'O Wins!!')
         disable_all_buttons()
+    # check if tie
+    if count==9 and winner==False:
+        messagebox.showinfo("Tic Tac Toe", "It is A Tie.\nNo One Wins")
+        disable_all_buttons()
 
 
 # button clicked function
@@ -161,28 +167,43 @@ def b_click(b):
         messagebox.showinfo('Tic Tac Toe', 'The Box is already Occupied.\nPick another Spot.')
 
 
+def reset():
+    global b1,b2,b3,b4,b5,b6,b7,b8,b9
+    global clicked, count
+    clicked = True
+    count = 0
+    # building buttons
+    b1 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="Yellow", command=lambda: b_click(b1))
+    b2 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="Yellow", command=lambda: b_click(b2))
+    b3 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="Yellow", command=lambda: b_click(b3))
+    b4 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="Yellow", command=lambda: b_click(b4))
+    b5 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="Yellow", command=lambda: b_click(b5))
+    b6 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="Yellow", command=lambda: b_click(b6))
+    b7 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="Yellow", command=lambda: b_click(b7))
+    b8 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="Yellow", command=lambda: b_click(b8))
+    b9 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="Yellow", command=lambda: b_click(b9))
+    
+    
+    # show our buttons to screen
+    b1.grid(row=0, column=0)
+    b2.grid(row=0, column=1)
+    b3.grid(row=0, column=2)
+    b4.grid(row=1, column=0)
+    b5.grid(row=1, column=1)
+    b6.grid(row=1, column=2)
+    b7.grid(row=2, column=0)
+    b8.grid(row=2, column=1)
+    b9.grid(row=2, column=2)
 
-# building buttons
-b1 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="Yellow", command=lambda: b_click(b1))
-b2 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="Yellow", command=lambda: b_click(b2))
-b3 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="Yellow", command=lambda: b_click(b3))
-b4 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="Yellow", command=lambda: b_click(b4))
-b5 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="Yellow", command=lambda: b_click(b5))
-b6 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="Yellow", command=lambda: b_click(b6))
-b7 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="Yellow", command=lambda: b_click(b7))
-b8 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="Yellow", command=lambda: b_click(b8))
-b9 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="Yellow", command=lambda: b_click(b9))
+# create menu
+my_menu = Menu(root)
+root.config(menu=my_menu)
+
+# create options menu
+options_menu = Menu(my_menu, tearoff=False)
+my_menu.add_cascade(label="Options", menu=options_menu)
+options_menu.add_command(label="Reset Game", command=reset)
 
 
-# show our buttons to screen
-b1.grid(row=0, column=0)
-b2.grid(row=0, column=1)
-b3.grid(row=0, column=2)
-b4.grid(row=1, column=0)
-b5.grid(row=1, column=1)
-b6.grid(row=1, column=2)
-b7.grid(row=2, column=0)
-b8.grid(row=2, column=1)
-b9.grid(row=2, column=2)
-
+reset()
 root.mainloop()
